@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm ="clr-namespace:NotesApplication.ViewModel"
+             x:Class="NotesApplication.Views.TasksPage"
+             Title="Tasks">
+
+    <ContentPage.BindingContext>
+        <vm:TaskPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear All" Order="Secondary" Command="{ Binding ClearAllTasks}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <CollectionView     ItemsSource="{Binding TasksList}"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding MySelectedItem}">
+
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
+                        <StackLayout Padding="10,5,10,5">
+                            <Frame Padding="10,5,10,5" CornerRadius="10" HasShadow="True">
+                                <FlexLayout Direction="Row" JustifyContent="Start" AlignItems="Center">
+                                    <CheckBox IsChecked="{Binding isChecked}"/>
+                                    <Label x:Name="TasksLabel"
+                                           Text="{Binding TaskContent}"
+                                           TextDecorations="{Binding Decoration}"
+                                           FontSize="Medium" 
+                                           MaxLines="1"/>
+                                </FlexLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+                Text="+" 
+                BackgroundColor="Yellow" 
+                FontSize="Large"
+                CornerRadius="100"
+                AbsoluteLayout.LayoutFlags="YProportional,XProportional"
+                AbsoluteLayout.LayoutBounds="0.96, 0.96, 60, 60" 
+                Command="{Binding AddTasks}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

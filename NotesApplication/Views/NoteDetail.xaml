@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotesApplication.Views.NoteDetail"
+             Title="Note Details"
+             >
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete Note" Clicked="DeleteNote_Clicked" Order="Secondary"/>
+        <ToolbarItem Text="Clear Note" Clicked="ClearNote_Clicked" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Entry x:Name ="NoteHeadingView" 
+                   Placeholder="Heading" 
+                   TextChanged="NoteHeadingView_TextChanged"/>
+            <Editor x:Name= "NoteContentView"
+                    Placeholder="Content" 
+                    TextChanged="NoteContentView_TextChanged"
+                    HeightRequest="300"
+                    />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

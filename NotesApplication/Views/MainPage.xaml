@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:NotesApplication.ViewModel"
+             x:Class="NotesApplication.Views.MainPage"
+             Title="Notes"
+             >
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear All" Order="Secondary" Command="{Binding ClearAllNotes}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Padding="10" BackgroundColor="White" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <!-- Top Bar
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="0,0,0,0">
+                        <ImageButton Source="notesIcon.png" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+                        <ImageButton Source="checkbox.png" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <ImageButton Source="menuVertical.png" BackgroundColor="Transparent" Padding="0,0,0,0"/>
+                </StackLayout>
+             -->
+                <StackLayout Orientation="Horizontal">
+                    <SearchBar HorizontalOptions="FillAndExpand" 
+                               Focused="SearchBar_Focused" 
+                               Unfocused="SearchBar_Unfocused" 
+                               Placeholder="Search Notes"
+                               Text="{Binding SearchBarText}"/>
+                    <Button x:Name="SearchBarButton" 
+                            IsVisible="False" 
+                            IsEnabled="False" 
+                            Text="Cancel" 
+                            BackgroundColor="Transparent"
+                            Command="{Binding CancelSearch}"
+                            />
+                </StackLayout>
+
+                <CollectionView ItemsSource="{Binding SearchNotes}"
+                                ItemsLayout="VerticalGrid,2"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding MySelectedItem}"
+                                IsVisible="{Binding SearchBarInUse}">
+
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate >
+                            <StackLayout Padding="10">
+                                <Frame Padding="10" CornerRadius="10" HasShadow="True">
+                                    <StackLayout>
+                                        <Label Text="{Binding NoteHeading}" FontSize = "Large" MaxLines="1"/>
+                                        <Label Text="{Binding NoteContent}" FontSize="Medium" MaxLines="4"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView ItemsSource="{Binding Notes}"
+                                ItemsLayout="VerticalGrid,2"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding MySelectedItem}"
+                                IsVisible="{Binding SearchBarNotInUse}">
+                    
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate >
+                            <StackLayout Padding="10">
+                                <Frame Padding="10" CornerRadius="10" HasShadow="True">
+                                    <StackLayout>
+                                        <Label Text="{Binding NoteHeading}" FontSize = "Large" MaxLines="1"/>
+                                        <Label Text="{Binding NoteContent}" FontSize="Medium" MaxLines="4"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+            <Button
+                Text="+" 
+                BackgroundColor="Yellow" 
+                FontSize="Large"
+                CornerRadius="100"
+                AbsoluteLayout.LayoutFlags="YProportional,XProportional"
+                AbsoluteLayout.LayoutBounds="0.96, 0.96, 60, 60" 
+                Command="{Binding AddNote}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

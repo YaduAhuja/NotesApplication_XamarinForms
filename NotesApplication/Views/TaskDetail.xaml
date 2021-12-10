@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotesApplication.Views.TaskDetail"
+             Title="Task Details">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete Task" Clicked="DeleteTasks_Clicked" Order="Secondary"/>
+        <ToolbarItem Text="Clear Note" Clicked="ClearTasks_Clicked" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Entry x:Name ="TasksHeadingView" 
+                   Placeholder="Heading" 
+                   TextChanged="TasksHeadingView_TextChanged"/>
+            <CheckBox x:Name= "TaskCheckBox"
+                    CheckedChanged="TasksCheckBox_Changed"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
